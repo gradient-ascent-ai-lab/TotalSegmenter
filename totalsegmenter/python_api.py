@@ -7,9 +7,9 @@ import numpy as np
 import nibabel as nib
 import torch
 
-from totalsegmentator.statistics import get_basic_statistics_for_entire_dir, get_radiomics_features_for_entire_dir
-from totalsegmentator.libs import download_pretrained_weights
-from totalsegmentator.config import setup_nnunet, setup_totalseg, increase_prediction_counter, send_usage_stats
+from totalsegmenter.statistics import get_basic_statistics_for_entire_dir, get_radiomics_features_for_entire_dir
+from totalsegmenter.libs import download_pretrained_weights
+from totalsegmenter.config import setup_nnunet, setup_totalseg, increase_prediction_counter, send_usage_stats
 
 
 def totalsegmentator(input, output, ml=False, nr_thr_resamp=1, nr_thr_saving=6,
@@ -36,7 +36,7 @@ def totalsegmentator(input, output, ml=False, nr_thr_resamp=1, nr_thr_saving=6,
 
     setup_nnunet()
 
-    from totalsegmentator.nnunet import nnUNet_predict_image  # this has to be after setting new env vars
+    from totalsegmenter.nnunet import nnUNet_predict_image  # this has to be after setting new env vars
 
     crop_addon = [3, 3, 3]  # default value
 

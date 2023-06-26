@@ -16,23 +16,23 @@ from multiprocessing import Pool
 import tempfile
 import torch
 
-from totalsegmentator.libs import nostdout
+from totalsegmenter.libs import nostdout
 
 with nostdout():
     from nnunet.inference.predict import predict_from_folder
     from nnunet.paths import default_plans_identifier, network_training_output_dir, default_trainer
 
-from totalsegmentator.map_to_binary import class_map, class_map_5_parts, map_taskid_to_partname
-from totalsegmentator.alignment import as_closest_canonical_nifti, undo_canonical_nifti
-from totalsegmentator.alignment import as_closest_canonical, undo_canonical
-from totalsegmentator.resampling import change_spacing
-from totalsegmentator.libs import combine_masks, compress_nifti, check_if_shape_and_affine_identical
-from totalsegmentator.dicom_io import dcm_to_nifti, save_mask_as_rtstruct
-from totalsegmentator.cropping import crop_to_mask_nifti, undo_crop_nifti
-from totalsegmentator.cropping import crop_to_mask, undo_crop
-from totalsegmentator.postprocessing import remove_outside_of_mask, extract_skin
-from totalsegmentator.nifti_ext_header import save_multilabel_nifti
-from totalsegmentator.statistics import get_basic_statistics_for_entire_dir
+from totalsegmenter.map_to_binary import class_map, class_map_5_parts, map_taskid_to_partname
+from totalsegmenter.alignment import as_closest_canonical_nifti, undo_canonical_nifti
+from totalsegmenter.alignment import as_closest_canonical, undo_canonical
+from totalsegmenter.resampling import change_spacing
+from totalsegmenter.libs import combine_masks, compress_nifti, check_if_shape_and_affine_identical
+from totalsegmenter.dicom_io import dcm_to_nifti, save_mask_as_rtstruct
+from totalsegmenter.cropping import crop_to_mask_nifti, undo_crop_nifti
+from totalsegmenter.cropping import crop_to_mask, undo_crop
+from totalsegmenter.postprocessing import remove_outside_of_mask, extract_skin
+from totalsegmenter.nifti_ext_header import save_multilabel_nifti
+from totalsegmenter.statistics import get_basic_statistics_for_entire_dir
 
 
 def _get_full_task_name(task_id: int, src: str="raw"):
@@ -309,7 +309,7 @@ def nnUNet_predict_image(file_in, file_out, task_id, model="3d_fullres", folds=N
 
         img_pred = nib.load(tmp_dir / "s01.nii.gz")
         if preview:
-            from totalsegmentator.preview import generate_preview
+            from totalsegmenter.preview import generate_preview
             # Generate preview before upsampling so it is faster and still in canonical space 
             # for better orientation.
             if not quiet: print("Generating preview...")

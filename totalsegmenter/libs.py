@@ -14,8 +14,8 @@ import requests
 import numpy as np
 import nibabel as nib
 
-from totalsegmentator.map_to_binary import class_map
-from totalsegmentator.map_to_binary import class_map_5_parts
+from totalsegmenter.map_to_binary import class_map
+from totalsegmenter.map_to_binary import class_map_5_parts
 
 """
 Helpers to suppress stdout prints from nnunet
@@ -24,7 +24,7 @@ https://stackoverflow.com/questions/2828953/silence-the-stdout-of-a-function-in-
 class DummyFile(object):
     def write(self, x): pass
 
-@contextlib.contextmanager
+@contextlib.contextmanagerÍ
 def nostdout(verbose=False):
     if not verbose:
         save_stdout = sys.stdout
