@@ -1,0 +1,17 @@
+name: coronary_arteries
+task_id: 503
+mask_type: heart
+crop_addon:
+- 3
+- 3
+- 3
+model_type: 3d_fullres
+trainer: nnUNetTrainerV2
+weights_url: https://zenodo.org/record/7271576/files/Task503_cardiac_motion.zip?download=1
+weights_subdir: cardiac_motion
+folds:
+- 0
+class_map:
+  1: coronary_arteries
+preview_roi_groups:
+- - coronary_arteries

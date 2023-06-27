@@ -1,0 +1,8 @@
+[tool.ruff]
+line-length = 120
+target-version = "py310"
+# pyflakes, pycodestyle, isort
+select = ["F", "E", "W", "I001"]
+
+[tool.ruff.mccabe]
+max-complexity = 20

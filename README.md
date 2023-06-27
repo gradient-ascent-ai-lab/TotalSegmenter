@@ -4,15 +4,20 @@ Tool for segmentation of 104 classes in CT images. It was trained on a wide rang
 
 ![Alt text](resources/imgs/overview_classes.png)
 
-Created by the department of [Research and Analysis at University Hospital Basel](https://www.unispital-basel.ch/en/radiologie-nuklearmedizin/forschung).  
+Created by the department of [Research and Analysis at University Hospital Basel](https://www.unispital-basel.ch/en/radiologie-nuklearmedizin/forschung).
 If you use it please cite our paper: [https://arxiv.org/abs/2208.05868](https://arxiv.org/abs/2208.05868). Please also cite [nnUNet](https://github.com/MIC-DKFZ/nnUNet) since TotalSegmentator is heavily based on it.
+
+
+### ⚠️ Note ⚠️
+
+This version of the repository has undergone significant changes. The README below is left intact but is outdated, for notes on the changes and new usage, see [REFACTOR.md](REFACTOR.md).
 
 
 ### Installation
 
 TotalSegmentator works on Ubuntu, Mac and Windows and on CPU and GPU (on CPU it is slow).
 
-Install dependencies:  
+Install dependencies:
 * Python >= 3.7
 * [Pytorch](http://pytorch.org/) >= 1.12.1
 * You should not have any nnU-Net installation in your python environment since TotalSegmentator will install its own custom installation.
@@ -35,7 +40,7 @@ TotalSegmentator -i ct.nii.gz -o segmentations
 ```
 > Note: A Nifti file or a folder of DICOM images is allowed as input
 
-> Note: If a CUDA compatible GPU is available TotalSegmentator will automatically use it. Otherwise it will use the CPU, which is a lot slower and should only be used with the `--fast` option.  
+> Note: If a CUDA compatible GPU is available TotalSegmentator will automatically use it. Otherwise it will use the CPU, which is a lot slower and should only be used with the `--fast` option.
 
 > Note: You can also try it online: [www.totalsegmentator.com](https://totalsegmentator.com/) (supports dicom files)
 
@@ -43,21 +48,21 @@ TotalSegmentator -i ct.nii.gz -o segmentations
 
 
 ### Advanced settings
-* `--fast`: For faster runtime and less memory requirements use this option. It will run a lower resolution model (3mm instead of 1.5mm). 
+* `--fast`: For faster runtime and less memory requirements use this option. It will run a lower resolution model (3mm instead of 1.5mm).
 * `--preview`: This will generate a 3D rendering of all classes, giving you a quick overview if the segmentation worked and where it failed (see `preview.png` in output directory).
 * `--ml`: This will save one nifti file containing all labels instead of one file for each class. Saves runtime during saving of nifti files. (see [here](https://github.com/wasserth/TotalSegmentator#class-details) for index to class name mapping).
 * `--roi_subset`: Takes a space separated list of class names (e.g. `spleen colon brain`) and only saves those classes. Saves runtime during saving of nifti files.
 * `--statistics`: This will generate a file `statistics.json` with volume (in mm³) and mean intensity of each class.
 * `--radiomics`: This will generate a file `statistics_radiomics.json` with radiomics features of each class. You have to install pyradiomics to use this (`pip install pyradiomics`).
- 
+
 
 ### Subtasks
 
 ![Alt text](resources/imgs/overview_subclasses.png)
 
-We added some more models to TotalSegmentator beyond the default one. This allows segmentation of even 
-more classes in more detailed subparts of the image. First you have to run TotalSegmentator with the 
-normal settings to get the normal masks. These masks are required to crop the image to a subregion on 
+We added some more models to TotalSegmentator beyond the default one. This allows segmentation of even
+more classes in more detailed subparts of the image. First you have to run TotalSegmentator with the
+normal settings to get the normal masks. These masks are required to crop the image to a subregion on
 which the detailed model will run.
 ```
 TotalSegmentator -i ct.nii.gz -o segmentations --fast
@@ -65,7 +70,7 @@ TotalSegmentator -i ct.nii.gz -o segmentations -ta lung_vessels
 ```
 Overview of available subtasks and the classes which they contain.
 
-Openly available:  
+Openly available:
 * **lung_vessels**: lung_vessels (cite [paper](https://www.sciencedirect.com/science/article/pii/S0720048X22001097)), lung_trachea_bronchia
 * **cerebral_bleed**: intracerebral_hemorrhage (cite [paper](https://www.mdpi.com/2077-0383/12/7/2631))
 * **hip_implant**: hip_implant
@@ -73,7 +78,7 @@ Openly available:
 * **body**: body, body_trunc, body_extremities, skin
 * **pleural_pericard_effusion**: pleural_effusion (cite [paper](http://dx.doi.org/10.1097/RLI.0000000000000869)), pericardial_effusion (cite [paper](http://dx.doi.org/10.3390/diagnostics12051045))
 
-Available after purchase of a license (free licenses possible for academic projects). Contact jakob.wasserthal@usb.ch if you are interested: 
+Available after purchase of a license (free licenses possible for academic projects). Contact jakob.wasserthal@usb.ch if you are interested:
 * **bones_extremities**: femur, patella, tibia, fibula, tarsal, metatarsal, phalanges_feet, humerus, ulna, radius, carpal, metacarpal, phalanges_hand, sternum, skull, spinal_cord
 * **tissue_types**: subcutaneous_fat, skeletal_muscle, torso_fat
 * **heartchambers_highres**: myocardium, atrium_left, ventricle_left, atrium_right, ventricle_right, aorta, pulmonary_artery (more precise heart chamber segmentation, trained on sub-millimeter resolution)
@@ -89,7 +94,7 @@ docker run --gpus 'device=0' --ipc=host -v /absolute/path/to/my/data/directory:/
 
 
 ### Resource Requirements
-Totalsegmentator has the following runtime and memory requirements (using a Nvidia RTX 3090 GPU):  
+Totalsegmentator has the following runtime and memory requirements (using a Nvidia RTX 3090 GPU):
 (1.5mm is the normal model and 3mm is the `--fast` model)
 
 ![Alt text](resources/imgs/runtime_table.png)
@@ -101,11 +106,11 @@ If you want to reduce memory consumption you can use the following options:
 
 
 ### Train / validation / test split
-The exact split of the dataset can be found in the file `meta.csv` inside of the [dataset](https://doi.org/10.5281/zenodo.6802613). This was used for the validation in our paper.  
-The exact numbers of the results for the high resolution model (1.5mm) can be found [here](resources/results_all_classes.json). The paper shows these numbers in the supplementary materials figure 11. 
+The exact split of the dataset can be found in the file `meta.csv` inside of the [dataset](https://doi.org/10.5281/zenodo.6802613). This was used for the validation in our paper.
+The exact numbers of the results for the high resolution model (1.5mm) can be found [here](resources/results_all_classes.json). The paper shows these numbers in the supplementary materials figure 11.
 To aggregate results across subjects and classes the following approach was taken: For each class in each subject calculate the (Dice) score, then take the average of all scores (micro averaging). If a class is not present on an image (e.g. the brain is not present on images of the legs) then exclude this value from the calculation.
 
-> Note: The model was trained on unblurred images. The published training dataset, however, has blurred faces for data privacy reasons. Therefore, models trained on the public dataset cannot be directly compared to our pretrained model. In the future we plan to provide a version of our model which was trained on the public blurred dataset so people can compare to this as a baseline. 
+> Note: The model was trained on unblurred images. The published training dataset, however, has blurred faces for data privacy reasons. Therefore, models trained on the public dataset cannot be directly compared to our pretrained model. In the future we plan to provide a version of our model which was trained on the public blurred dataset so people can compare to this as a baseline.
 
 
 ### Retrain model on your own
@@ -154,13 +159,13 @@ pip install SimpleITK==2.0.2
 TotalSegmentator (starting in v1.5.4) sends anonymous usage statistics to help us improve it further. You can deactivate it by setting `send_usage_stats` to `false` in `~/.totalsegmentator/config.json`.
 
 
-### Reference 
+### Reference
 For more details see this paper [https://arxiv.org/abs/2208.05868](https://arxiv.org/abs/2208.05868).
 If you use this tool please cite it as follows
 ```
 Wasserthal J., Meyer M., Breit H., Cyriac J., Yang S., Segeroth M. TotalSegmentator: robust segmentation of 104 anatomical structures in CT images, 2022. URL: https://arxiv.org/abs/2208.05868.  arXiv: 2208.05868
 ```
-Please also cite [nnUNet](https://github.com/MIC-DKFZ/nnUNet) since TotalSegmentator is heavily based on it.  
+Please also cite [nnUNet](https://github.com/MIC-DKFZ/nnUNet) since TotalSegmentator is heavily based on it.
 Moreover, we would really appreciate if you let us know what you are using this tool for. You can also tell us what classes we should add in future releases. You can do so [here](https://github.com/wasserth/TotalSegmentator/issues/1).
 
 
@@ -168,7 +173,7 @@ Moreover, we would really appreciate if you let us know what you are using this 
 
 The following table shows a list of all classes.
 
-TA2 is a standardised way to name anatomy. Mostly the TotalSegmentator names follow this standard. 
+TA2 is a standardised way to name anatomy. Mostly the TotalSegmentator names follow this standard.
 For some classes they differ which you can see in the table below.
 
 [Here](resources/totalsegmentator_snomed_mapping.csv) you can find a mapping of the TotalSegmentator classes to SNOMED-CT codes.

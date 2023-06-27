@@ -1,0 +1,16 @@
+name: covid
+task_id: 201
+mask_type: lung
+crop_addon:
+- 3
+- 3
+- 3
+model_type: 3d_fullres
+trainer: nnUNetTrainerV2
+weights_subdir: covid
+folds:
+- 0
+class_map:
+  1: lung_covid_infiltrate
+preview_roi_groups:
+- - lung_covid_infiltrate

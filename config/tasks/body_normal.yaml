@@ -1,0 +1,19 @@
+name: body_normal
+task_id: 273
+resample: 1.5
+crop_addon:
+- 3
+- 3
+- 3
+model_type: 3d_fullres
+trainer: nnUNetTrainerV2
+weights_url: https://zenodo.org/record/7510286/files/Task273_Body_extrem_1259subj.zip?download=1
+weights_subdir: body_extrem_1259subj
+folds:
+- 0
+class_map:
+  1: body_trunc
+  2: body_extremities
+preview_roi_groups:
+- - body_trunc
+  - body_extremities

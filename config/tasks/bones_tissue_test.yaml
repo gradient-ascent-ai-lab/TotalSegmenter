@@ -1,0 +1,53 @@
+name: bones_tissue_test
+task_id: 278
+resample: 1.5
+crop_addon:
+- 3
+- 3
+- 3
+model_type: 3d_fullres
+trainer: nnUNetTrainerV2_ep4000_nomirror
+weights_url: manually_download
+weights_subdir: totalsegmentator_part6_bones_1259subj
+folds:
+- 0
+class_map:
+  1: femur
+  2: patella
+  3: tibia
+  4: fibula
+  5: tarsal
+  6: metatarsal
+  7: phalanges_feet
+  8: humerus
+  9: ulna
+  10: radius
+  11: carpal
+  12: metacarpal
+  13: phalanges_hand
+  14: sternum
+  15: skull
+  16: subcutaneous_fat
+  17: skeletal_muscle
+  18: torso_fat
+  19: spinal_cord
+preview_roi_groups:
+- - femur
+  - patella
+  - tibia
+  - fibula
+  - tarsal
+  - metatarsal
+  - phalanges_feet
+  - humerus
+  - ulna
+  - radius
+  - carpal
+  - metacarpal
+  - phalanges_hand
+  - sternum
+  - skull
+  - spinal_cord
+- - subcutaneous_fat
+  - skeletal_muscle
+  - torso_fat

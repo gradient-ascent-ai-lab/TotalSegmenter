@@ -1,47 +1,47 @@
-import sys
-from setuptools import setup, find_packages
+from collections import defaultdict
+
+from setuptools import find_packages, setup
+
+with open("VERSION") as f:
+    version = f.read()
 
 
-setup(name='TotalSegmentator',
-        version='1.5.6',
-        description='Robust segmentation of 104 classes in CT images.',
-        long_description="See Readme.md on github for more details.",
-        url='https://github.com/wasserth/TotalSegmentator',
-        author='Jakob Wasserthal',
-        author_email='jakob.wasserthal@usb.ch',
-        python_requires='>=3.5',
-        license='Apache 2.0',
-        packages=find_packages(),
-        install_requires=[
-            'torch>=1.10.2',
-            'numpy',
-            'psutil',
-            # Any version <2.1.0 because of this issue: 
-            # https://github.com/SimpleITK/SimpleITK/issues/1433
-            'SimpleITK',
-            'nibabel>=2.3.0',
-            'tqdm>=4.45.0',
-            'p_tqdm',
-            'xvfbwrapper',
-            'fury',
-            'batchgenerators==0.21',
-            # This does not work if want to upload to pypi
-            # 'nnunet @ git+https://github.com/wasserth/nnUNet_cust@working_2022_03_18#egg=nnUNet'
-            'nnunet-customized==1.2',
-            f'requests{requests_version}',
-            'rt_utils'
-        ],
-        zip_safe=False,
-        classifiers=[
-            'Intended Audience :: Science/Research',
-            'Programming Language :: Python',
-            'Topic :: Scientific/Engineering',
-            'Operating System :: Unix',
-            'Operating System :: MacOS'
-        ],
-        scripts=[
-            'bin/TotalSegmentator', 'bin/totalseg_combine_masks', 'bin/crop_to_body', 
-            'bin/totalseg_import_weights', 'bin/totalseg_download_weights',
-            'bin/totalseg_setup_manually'
-        ]
-    )
+with open("requirements.txt") as f:
+    extras_require = defaultdict(list)
+    section = None
+    for line in f.read().splitlines():
+        if line.startswith("#"):
+            section = line[2:]
+            continue
+        extras_require[section].append(line)
+
+
+install_requires = extras_require.pop("core")
+dev, test = extras_require.pop("dev"), extras_require.pop("test")
+extras_require["all"] = [dep for section in extras_require.values() for dep in section]
+extras_require["dev"], extras_require["test"] = dev, test
+
+
+setup(
+    name="total-segmenter",
+    version=version,
+    description="Robust segmentation of 104 classes in CT images.",
+    long_description=open("README.md").read(),
+    url="https://github.com/wasserth/TotalSegmentator",
+    author="Jakob Wasserthal",
+    author_email="jakob.wasserthal@usb.ch",
+    python_requires=">=3.8",
+    license="Apache 2.0",
+    packages=find_packages(),
+    install_requires=install_requires,
+    extras_require=dict(extras_require),
+    entry_points={"console_scripts": ["totalsegmenter = totalsegmenter.cli:cli"]},
+    zip_safe=False,
+    classifiers=[
+        "Intended Audience :: Science/Research",
+        "Programming Language :: Python",
+        "Topic :: Scientific/Engineering",
+        "Operating System :: Unix",
+        "Operating System :: MacOS",
+    ],
+)

@@ -1,0 +1,44 @@
+name: aortic_branches_test
+task_id: 435
+resample: 1.5
+crop_addon:
+- 3
+- 3
+- 3
+model_type: 3d_fullres
+trainer: nnUNetTrainerV2_nomirror
+weights_subdir: heart_vessels_118subj
+folds:
+- 0
+class_map:
+  1: brachiocephalic_trunk
+  2: subclavian_artery_right
+  3: subclavian_artery_left
+  4: common_carotid_artery_right
+  5: common_carotid_artery_left
+  6: brachiocephalic_vein_left
+  7: brachiocephalic_vein_right
+  8: atrial_appendage_left
+  9: superior_vena_cava
+  10: pulmunary_vein
+  11: pulmunary_artery
+  12: heart_atrium_left
+  13: heart_atrium_right
+  14: aorta
+  15: thyroid_gland
+preview_roi_groups:
+- - brachiocephalic_trunk
+  - subclavian_artery_right
+  - subclavian_artery_left
+  - aorta
+  - common_carotid_artery_right
+  - common_carotid_artery_left
+- - superior_vena_cava
+  - brachiocephalic_vein_left
+  - brachiocephalic_vein_right
+  - atrial_appendage_left
+- - pulmunary_vein
+  - pulmunary_artery
+- - heart_atrium_left
+  - heart_atrium_right
+  - thyroid_gland

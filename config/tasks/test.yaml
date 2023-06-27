@@ -1,0 +1,55 @@
+name: test
+task_id: 517
+mask_type: body
+crop_addon:
+- 3
+- 3
+- 3
+model_type: 3d_fullres
+trainer: nnUNetTrainerV2
+weights_url:
+weights_subdir:
+folds:
+- 0
+class_map:
+  1: carpal
+  2: clavicula
+  3: femur
+  4: fibula
+  5: humerus
+  6: metacarpal
+  7: metatarsal
+  8: patella
+  9: hips
+  10: phalanges_hand
+  11: radius
+  12: ribs
+  13: scapula
+  14: skull
+  15: spine
+  16: sternum
+  17: tarsal
+  18: tibia
+  19: phalanges_feet
+  20: ulna
+preview_roi_groups:
+- - carpal
+  - clavicula
+  - femur
+  - fibula
+  - humerus
+  - metacarpal
+  - metatarsal
+  - patella
+  - hips
+  - phalanges_hand
+  - radius
+  - ribs
+  - scapula
+  - skull
+  - spine
+  - sternum
+  - tarsal
+  - tibia
+  - phalanges_feet
+  - ulna

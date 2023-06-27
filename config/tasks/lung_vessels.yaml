@@ -1,0 +1,19 @@
+name: lung_vessels
+task_id: 258
+mask_type: lung
+crop_addon:
+- 3
+- 3
+- 3
+model_type: 3d_fullres
+trainer: nnUNetTrainerV2
+weights_url: https://zenodo.org/record/7064718/files/Task258_lung_vessels_248subj.zip?download=1
+weights_subdir: lung_vessels_248subj
+folds:
+- 0
+class_map:
+  1: lung_vessels
+  2: lung_trachea_bronchia
+preview_roi_groups:
+- - lung_trachea_bronchia
+- - lung_vessels

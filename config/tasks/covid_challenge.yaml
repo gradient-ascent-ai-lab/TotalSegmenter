@@ -1,0 +1,12 @@
+name: covid_challenge
+task_id: 200
+mask_type: lung
+crop_addon:
+- 3
+- 3
+- 3
+model_type: 3d_fullres
+trainer: nnUNetTrainerV2
+weights_subdir: covid_challenge
+class_map:
+preview_roi_groups:

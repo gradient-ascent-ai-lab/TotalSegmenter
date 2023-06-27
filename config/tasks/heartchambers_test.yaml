@@ -1,0 +1,27 @@
+name: heartchambers_test
+task_id: 417
+mask_type: heart
+crop_addon:
+- 3
+- 3
+- 3
+model_type: 3d_lowres
+trainer: nnUNetTrainerV2
+weights_url: manually_download
+weights_subdir: heart_mixed_317subj
+class_map:
+  1: heart_myocardium
+  2: heart_atrium_left
+  3: heart_ventricle_left
+  4: heart_atrium_right
+  5: heart_ventricle_right
+  6: aorta
+  7: pulmonary_artery
+preview_roi_groups:
+- - heart_myocardium
+- - heart_atrium_left
+  - heart_ventricle_left
+- - heart_atrium_right
+  - heart_ventricle_right
+- - aorta
+  - pulmonary_artery

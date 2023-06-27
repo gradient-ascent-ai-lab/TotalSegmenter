@@ -1,0 +1,17 @@
+name: cerebral_bleed
+task_id: 150
+mask_type: brain
+crop_addon:
+- 3
+- 3
+- 3
+model_type: 3d_fullres
+trainer: nnUNetTrainerV2
+weights_url: https://zenodo.org/record/7079161/files/Task150_icb_v0.zip?download=1
+weights_subdir: icb_v0
+folds:
+- 0
+class_map:
+  1: intracerebral_hemorrhage
+preview_roi_groups:
+- - intracerebral_hemorrhage

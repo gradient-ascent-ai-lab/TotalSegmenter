@@ -1,0 +1,19 @@
+name: body_fast
+task_id: 269
+resample: 6.0
+crop_addon:
+- 3
+- 3
+- 3
+model_type: 3d_fullres
+trainer: nnUNetTrainerV2
+weights_url: http://94.16.105.223/static/Task269_Body_extrem_6mm_1200subj.zip
+weights_subdir: body_extrem_6mm_1200subj
+folds:
+- 0
+class_map:
+  1: body_trunc
+  2: body_extremities
+preview_roi_groups:
+- - body_trunc
+  - body_extremities

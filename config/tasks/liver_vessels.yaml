@@ -1,0 +1,17 @@
+name: liver_vessels
+task_id: 8
+mask_type: liver
+crop_addon:
+- 3
+- 3
+- 3
+model_type: 3d_fullres
+trainer: nnUNetTrainerV2
+weights_url: https://zenodo.org/record/7573746/files/Task008_HepaticVessel.zip?download=1
+weights_subdir: hepaticvessel
+class_map:
+  1: liver_vessels
+  2: liver_tumor
+preview_roi_groups:
+- - liver_vessels
+  - liver_tumor

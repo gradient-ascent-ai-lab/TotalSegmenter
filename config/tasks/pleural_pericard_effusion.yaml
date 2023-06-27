@@ -1,0 +1,17 @@
+name: pleural_pericard_effusion
+task_id: 315
+mask_type: lung
+crop_addon:
+- 3
+- 3
+- 3
+model_type: 3d_fullres
+trainer: nnUNetTrainerV2
+weights_url: https://zenodo.org/record/7510288/files/Task315_thoraxCT.zip?download=1
+weights_subdir: thoraxct
+class_map:
+  2: pleural_effusion
+  3: pericardial_effusion
+preview_roi_groups:
+- - pleural_effusion
+  - pericardial_effusion
